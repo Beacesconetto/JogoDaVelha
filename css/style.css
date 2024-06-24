@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+body {
+    font-family: "Open Sans" ;
+}
+
+h2 {
+    margin-top: -5px;
+    text-align: center;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 240px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: teal;
+    border: 3px solid black;
+}
+
+.grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.celula {
+    width: 75px;
+    height: 65px;
+    font-size: 30pt;
+    margin: 4px 2px;
+    font-weight: 300pt;
+    padding-top: 10px;
+    border-radius: 3px;
+    text-align: center;
+    background-color: aquamarine;
+}
