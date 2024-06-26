@@ -1,5 +1,5 @@
 const celulas = document.querySelectorAll(".celula");
-let checkTurn = true;
+let GameEnd = false;
 const jogador_X = "X";
 const jogador_O = "O";
 
@@ -17,14 +17,34 @@ const combinacoes = [
 
 document.addEventListener("click", (event) => {
     if (event.target.matches(".celula")){
-        play(event.target.id);
+        play(event.target.id, jogador_X);
+        setTimeout (() => bot(), 500);
     }
-    });
+});
+
+function bot() {
+    const positionAvailable = [];
+    for (index in celulas) {
+        if(!isNaN(index)) {
+            if (
+                !celulas[index].classList.contains("X") &&
+                !celulas[index].classList.contains("O")
+            ) {
+                positionAvailable.push(index);
+            }
+        } 
+    }
+    const positionRandom = Math.floor(Math.random() * positionAvailable.length); //Math.floor aredonda o numero quebrado para baixo/inteiro
+
+    if (!GameEnd) {
+        play(positionAvailable [positionRandom], jogador_O);
+    }    
+}
+
 
     // logica do jogo da velha
-    function play(id) {
+    function play(id, turn) {
         const celula = document.getElementById(id);
-        turn = checkTurn ? jogador_X : jogador_O;
         celula.textContent = turn;
         celula.classList.add(turn);
         checkWinner(turn);
@@ -43,9 +63,7 @@ document.addEventListener("click", (event) => {
             endGame(turn);
         } else if (checkTie ()) {
             endGame();
-        } else {
-            checkTurn = !checkTurn;  
-        }
+        } 
     } 
 
     function checkTie() {
@@ -69,6 +87,7 @@ document.addEventListener("click", (event) => {
 
     // winner = null pq se vier com parametro ele prevalece mas se vier sem ela fica nula
     function endGame(winner = null) {
+        GameEnd = true;
         const darkScreen = document.getElementById("dark-screen");
         const h2 = document.createElement("h2");
         const h3 = document.createElement("h3");
